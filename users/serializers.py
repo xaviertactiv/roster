@@ -4,12 +4,14 @@
 import datetime
 
 from django.conf import settings
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, get_user_model
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
+
+from workspaces.serializers import WorkSpaceSerializer
 
 
 class AuthTokenSerializer(serializers.Serializer):
@@ -61,3 +63,26 @@ class AuthTokenSerializer(serializers.Serializer):
             token = Token.objects.create(user=self.user)
 
         return token
+
+
+class UserSerializer(serializers.ModelSerializer):
+    """ user serializer
+    """
+    workspaces = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = get_user_model()
+        fields = (
+            'email',
+            'first_name',
+            'last_name',
+            'image',
+            'date_joined',
+            'workspaces'
+        )
+
+    def get_workspaces(self, instance):
+        return WorkSpaceSerializer(
+            WorkSpaceSerializer.Meta.model.objects.filter(user=instance),
+            many=True
+        ).data
