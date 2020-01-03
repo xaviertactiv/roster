@@ -1,7 +1,9 @@
 <div class="workspaces">
     <h3>Workspaces</h3>
-    <div class="workspace-item d-flex justify-content-between">
-        <a href="#">Project 1</a>
+    <div
+        *ngFor="let workspace of auth.user.workspaces"
+        class="workspace-item d-flex justify-content-between">
+        <a href="#">{{ workspace.name }}</a>
         <a href="#">Team (1)</a>
         <a href="#">notification</a>
         <a href="#">Messages</a>

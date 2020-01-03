@@ -1,4 +1,5 @@
 // tslint:disable: variable-name
+import { WorkSpace } from './workspace.models';
 
 /* Model class for User object
  */
@@ -10,6 +11,7 @@ export class User {
   image: string = null;
   date_joined: string = null;
   date_updated: string = null;
+  workspaces: WorkSpace[] = new Array<WorkSpace>();
 
   constructor(data = {}) {
     Object.assign(this, data);
