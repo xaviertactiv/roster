@@ -11,8 +11,6 @@ from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
-from workspaces.serializers import WorkSpaceSerializer
-
 
 class AuthTokenSerializer(serializers.Serializer):
     """ auth token serializer
@@ -65,10 +63,25 @@ class AuthTokenSerializer(serializers.Serializer):
         return token
 
 
-class UserSerializer(serializers.ModelSerializer):
+class BaseUserSerializer(serializers.ModelSerializer):
+    """ user serializer
+    """
+    class Meta:
+        model = get_user_model()
+        fields = (
+            'email',
+            'first_name',
+            'last_name',
+            'image',
+            'date_joined'
+        )
+
+
+class UserSerializer(BaseUserSerializer):
     """ user serializer
     """
     workspaces = serializers.SerializerMethodField(read_only=True)
+    jobs = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = get_user_model()
@@ -78,11 +91,20 @@ class UserSerializer(serializers.ModelSerializer):
             'last_name',
             'image',
             'date_joined',
-            'workspaces'
+            'workspaces',
+            'jobs'
         )
 
     def get_workspaces(self, instance):
+        from workspaces.serializers import WorkSpaceSerializer
         return WorkSpaceSerializer(
             WorkSpaceSerializer.Meta.model.objects.filter(user=instance),
+            many=True
+        ).data
+
+    def get_jobs(self, instance):
+        from jobs.serializers import JobSerializer
+        return JobSerializer(
+            JobSerializer.Meta.model.objects.filter(contractor=instance),
             many=True
         ).data

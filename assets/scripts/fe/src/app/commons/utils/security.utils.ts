@@ -8,6 +8,8 @@ export function LoginRequired(t) {
   const auth = t.injector().get(AuthService);
   const state = t.router.stateService;
 
+  console.log('ervin');
+  console.log(auth.authenticated(), auth.getToken());
   if (!auth.authenticated()) { return state.target('login'); }
 }
 

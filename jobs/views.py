@@ -1,3 +1,12 @@
-from django.shortcuts import render
+from rest_framework.response import Response
+from rest_framework.viewsets import ViewSet
 
-# Create your views here.
+
+class Jobs(ViewSet):
+    """ jobs list endpoint
+    """
+    def get(self, request):
+        serializer = self.serializer_class(
+            self.serializer_class.Meta.model.objects.filter(contractor=request.user)
+        )
+        return Response(serializer.data, status=200)

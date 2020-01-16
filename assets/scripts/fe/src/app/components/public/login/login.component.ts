@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       this.auth.login(value)
         .then((resp: any) => {
           // redirect to the dashboard
-          this.state.go('contractors-dashboard');
+          this.state.go('contractor-dashboard');
         })
         .catch((err: any) => {
           this.form.errors = err;
