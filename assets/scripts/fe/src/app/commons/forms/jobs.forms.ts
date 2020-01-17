@@ -5,21 +5,25 @@ import {
     Validators
 } from '@angular/forms';
 
-
-export class LoginForm {
+export class JobForm {
     public form: FormGroup;
     public errors: string = null;
+    public submitted = false;
 
     constructor(data) {
-        // Initialize the form builder
+        // initialize the form builder
         this.form = new FormBuilder().group({
-            email    : new FormControl(null, [Validators.required, Validators.email]),
-            password : new FormControl(null, [Validators.required])
+            title : new FormControl(null, [Validators.required]),
+            description : new FormControl(null, [Validators.required])
         });
     }
 
     // check if form field is valid
     valid(f: any) {
+        // validate when the submit button is pressed and
+        // there are no user input (change) event.
+        if (this.submitted && !this.form.get(f).dirty) { return false; }
+        // validate for each user input (change)
         return !(!this.form.get(f).valid && this.form.get(f).touched);
     }
 

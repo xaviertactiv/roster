@@ -1,1 +1,14 @@
-<p>create works!</p>
+<form [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)">
+    <span [hidden]="!form.errors">Something went wrong. Please refresh the page</span>
+    <div>
+        <label>Title:</label>
+        <input formControlName="title" type="text">
+        <span [hidden]="form.valid('title')">This field is required.</span>
+    </div>
+    <div>
+        <label>Content:</label>
+        <textarea formControlName="description"></textarea>
+        <span [hidden]="form.valid('description')">This field is required.</span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>

@@ -17,7 +17,8 @@ class Jobs(ViewSet):
 
     def create(self, request):
         serializer = self.serializer_class(
-            data=self.request.data
+            data=request.data,
+            user=request.user
         )
         serializer.is_valid(raise_exception=True)
         serializer.save()

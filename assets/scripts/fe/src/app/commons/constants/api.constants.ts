@@ -9,3 +9,7 @@ export const API_USERS = urlsafe(API_URL, 'users');
  */
 export const API_AUTH = urlsafe(API_USERS, 'auth');
 export const API_AUTH_LOGIN = urlsafe(API_AUTH, 'login');
+
+/* JOBS
+ */
+export const API_JOBS = urlsafe(API_URL, 'jobs');
