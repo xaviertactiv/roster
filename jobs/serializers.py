@@ -19,10 +19,10 @@ class TagSerializer(serializers.ModelSerializer):
 class JobSerializer(serializers.ModelSerializer):
     """ job serializer
     """
-    contractor = BaseUserSerializer()
-    user_hired = BaseUserSerializer()
-    categories = CategorySerializer(many=True)
-    tags = TagSerializer(many=True)
+    contractor = BaseUserSerializer(read_only=True)
+    user_hired = BaseUserSerializer(read_only=True)
+    categories = CategorySerializer(required=False, many=True)
+    tags = TagSerializer(required=False, many=True)
 
     class Meta:
         model = Job
@@ -37,3 +37,14 @@ class JobSerializer(serializers.ModelSerializer):
             'date_updated',
             'user_hired',
         )
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        return super(JobSerializer, self).__init__(*args, **kwargs)
+
+    def create(self, data):
+        return self.Meta.model.objects.create(
+            contractor=self.user,
+            **data,
+        )
+        
