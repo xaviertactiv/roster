@@ -20,5 +20,5 @@ class TagAdmin(admin.ModelAdmin):
 class JobAdmin(admin.ModelAdmin):
     """ job admin config
     """
-    list_display = ('title', 'contractor', 'user_hired', 'date_created', 'date_updated')
+    list_display = ('title', 'client', 'user_hired', 'date_created', 'date_updated')
     filter_horizontal = ('categories', 'tags')

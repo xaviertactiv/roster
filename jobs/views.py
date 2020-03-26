@@ -11,7 +11,8 @@ class Jobs(ViewSet):
 
     def get(self, request):
         serializer = self.serializer_class(
-            self.serializer_class.Meta.model.objects.filter(contractor=request.user)
+            self.serializer_class.Meta.model.objects.all(),
+            many=True
         )
         return Response(serializer.data, status=200)
 

@@ -11,6 +11,8 @@ from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
+from .models import Client, Contractor
+
 
 class AuthTokenSerializer(serializers.Serializer):
     """ auth token serializer
@@ -63,48 +65,54 @@ class AuthTokenSerializer(serializers.Serializer):
         return token
 
 
-class BaseUserSerializer(serializers.ModelSerializer):
-    """ user serializer
+class ClientSerializer(serializers.ModelSerializer):
+    """ client serializer
     """
     class Meta:
-        model = get_user_model()
+        model = Client
         fields = (
-            'email',
-            'first_name',
-            'last_name',
-            'image',
-            'date_joined'
+            'id',
+            'user'
         )
 
 
-class UserSerializer(BaseUserSerializer):
+class ContractorSerializer(serializers.ModelSerializer):
+    """ contractor serializer
+    """
+    class Meta:
+        model = Contractor
+        fields = (
+            'id',
+            'user'
+        )
+
+
+class UserSerializer(serializers.ModelSerializer):
     """ user serializer
     """
-    workspaces = serializers.SerializerMethodField(read_only=True)
-    jobs = serializers.SerializerMethodField(read_only=True)
+    client = serializers.SerializerMethodField()
+    contractor = serializers.SerializerMethodField()
 
     class Meta:
         model = get_user_model()
         fields = (
+            'id',
             'email',
             'first_name',
             'last_name',
             'image',
             'date_joined',
-            'workspaces',
-            'jobs'
+            'is_client',
+            'client',
+            'contractor'
         )
 
-    def get_workspaces(self, instance):
-        from workspaces.serializers import WorkSpaceSerializer
-        return WorkSpaceSerializer(
-            WorkSpaceSerializer.Meta.model.objects.filter(user=instance),
-            many=True
-        ).data
+    def get_client(self, instance):
+        if not instance.is_client:
+            return dict()
+        return ClientSerializer(instance.profile).data
 
-    def get_jobs(self, instance):
-        from jobs.serializers import JobSerializer
-        return JobSerializer(
-            JobSerializer.Meta.model.objects.filter(contractor=instance),
-            many=True
-        ).data
+    def get_contractor(self, instance):
+        if instance.is_client:
+            return dict()
+        return ContractorSerializer(instance.profile).data

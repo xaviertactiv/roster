@@ -28,5 +28,5 @@ export function NavSideContent(content) {
     navigation: NavComponent,
     side: SideComponent,
     content
-  }
+  };
 }

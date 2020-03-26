@@ -4,14 +4,21 @@ import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UIRouterModule } from '@uirouter/angular';
 
-import { DashboardComponent } from './contractors/dashboard/dashboard.component';
+import { DashboardComponent as C_DashboardComponent } from './contractors/dashboard/dashboard.component';
+import { DashboardComponent as F_DashboardComponent } from './clients/dashboard/dashboard.component';
+
 import { NavComponent } from './partials/nav/nav.component';
 import { SideComponent } from './partials/side/side.component';
 
 
 
 @NgModule({
-  declarations: [DashboardComponent, NavComponent, SideComponent],
+  declarations: [
+    C_DashboardComponent,
+    F_DashboardComponent,
+    NavComponent,
+    SideComponent
+  ],
   imports: [
     CommonModule,
     NgbModule,

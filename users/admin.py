@@ -7,6 +7,10 @@ from django.contrib.auth.admin import UserAdmin as DefaultUserConfig
 from django.utils.translation import gettext_lazy as _
 
 from rest_framework.authtoken.models import Token
+from .models import Client, Contractor
+
+
+admin.site.unregister(Token)
 
 
 class TokenAdmin(admin.TabularInline):
@@ -14,6 +18,20 @@ class TokenAdmin(admin.TabularInline):
     """
     model = Token
     readonly_fields = ('key',)
+
+
+class ClientAdmin(admin.TabularInline):
+    """ client admin
+    """
+    model = Client
+    extra = 0
+
+
+class ContractorAdmin(admin.TabularInline):
+    """ client admin
+    """
+    model = Contractor
+    extra = 0
 
 
 @admin.register(get_user_model())
@@ -25,8 +43,8 @@ class UserAdmin(DefaultUserConfig):
     ordering = ('email',)
 
     filter_horizontal = ('groups', 'user_permissions')
-    list_display = ('email', 'first_name', 'last_name', 'date_joined')
-    inlines = (TokenAdmin,)
+    list_display = ('email', 'first_name', 'last_name', 'get_user_type', 'date_joined')
+    inlines = (TokenAdmin, ClientAdmin, ContractorAdmin)
 
     fieldsets = (
         (None, {
@@ -51,5 +69,7 @@ class UserAdmin(DefaultUserConfig):
         }),
     )
 
+    def get_user_type(self, instance):
+        return f"{ instance.user_type }"
+    get_user_type.short_description = "User Type"
 
-admin.site.unregister(Token)

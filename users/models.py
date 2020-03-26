@@ -9,9 +9,28 @@ from django.dispatch import receiver
 from django.utils import timezone
 
 from rest_framework.authtoken.models import Token
+from utils.annoying import get_object_or_none
 
 from .managers import UserManager
 from .utils import user_media_path
+
+
+class Client(models.Model):
+    """ client details
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return f"{self.user}"
+
+
+class Contractor(models.Model):
+    """ freelancer
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return f"{self.user}"
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -34,10 +53,30 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ("first_name", "last_name")
     _image = _cover = None
 
+    def __init__(self, *args, **kwargs):
+        super(User, self).__init__(*args, **kwargs)
+        # set the user type information
+        # upon initialization.
+        self.profile = self._get_profile()
+
     def __str__(self):
         return f"{self.email}"
 
+    def _get_profile(self):
+        _get = get_object_or_none
+        return _get(Client, user=self) or _get(Contractor, user=self)
+
+    @property
+    def is_client(self):
+        return isinstance(self.profile, Client)
+
+    @property
+    def user_type(self):
+        return f"{'Client' if self.is_client else 'Contractor'}"
+
     def get_full_name(self):
+        """ return the display name
+        """
         return f"{self.first_name} {self.last_name}".title()
 
     def get_token(self):
@@ -55,6 +94,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
         return token
 
+
 @receiver(post_save, sender=User)
 def create_auth_token(instance=None, created=False, **kwargs):
     """ generate a user token for new user.
@@ -68,7 +108,7 @@ class TeamMember(models.Model):
     """ membership
     """
     team = models.ForeignKey('Team', on_delete=models.CASCADE)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
+    user = models.ForeignKey('Contractor', null=True, on_delete=models.SET_NULL)
 
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
