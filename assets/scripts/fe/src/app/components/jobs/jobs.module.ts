@@ -6,11 +6,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UIRouterModule } from '@uirouter/angular';
 
 import { CreateComponent } from './create/create.component';
+import { ApplyComponent } from './apply/apply.component';
 
 
 
 @NgModule({
-  declarations: [CreateComponent],
+  declarations: [CreateComponent, ApplyComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

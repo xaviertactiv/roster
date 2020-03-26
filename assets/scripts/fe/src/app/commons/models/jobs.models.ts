@@ -26,4 +26,8 @@ export class Job {
   tags: Tag[] = Array<Tag>();
   date_created: string = null;
   date_updated: string = null;
+
+  constructor(data = {}) {
+    Object.assign(this, data);
+  }
 }

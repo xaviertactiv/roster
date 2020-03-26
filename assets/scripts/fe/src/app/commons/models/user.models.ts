@@ -1,6 +1,29 @@
 // tslint:disable: variable-name
 import { WorkSpace } from './workspace.models';
 
+
+/* Model class for the Client object
+ */
+export class Client {
+  id: string = null;
+  user: string = null;
+
+  constructor(data = {}) {
+    Object.assign(this, data);
+  }
+}
+
+/* Model class for the Client object
+ */
+export class Contractor {
+  id: string = null;
+  user: string = null;
+
+  constructor(data = {}) {
+    Object.assign(this, data);
+  }
+}
+
 /* Model class for User object
  */
 export class User {
@@ -11,7 +34,11 @@ export class User {
   image: string = null;
   date_joined: string = null;
   date_updated: string = null;
-  workspaces: WorkSpace[] = new Array<WorkSpace>();
+  is_client = false;
+
+  client: Client = new Client();
+  contractor: Contractor = new Contractor();
+  // workspaces: WorkSpace[] = new Array<WorkSpace>();
 
   constructor(data = {}) {
     Object.assign(this, data);
@@ -27,3 +54,4 @@ export class User {
     return `${this.email}`;
   }
 }
+

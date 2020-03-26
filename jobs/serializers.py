@@ -1,5 +1,9 @@
 from rest_framework import serializers
-from users.serializers import BaseUserSerializer
+from users.serializers import (
+    UserSerializer,
+    ClientSerializer,
+    ContractorSerializer,
+)
 
 from .models import Job, Category, Tag
 
@@ -19,8 +23,8 @@ class TagSerializer(serializers.ModelSerializer):
 class JobSerializer(serializers.ModelSerializer):
     """ job serializer
     """
-    contractor = BaseUserSerializer(read_only=True)
-    user_hired = BaseUserSerializer(read_only=True)
+    client = ClientSerializer(read_only=True)
+    user_hired = ContractorSerializer(read_only=True)
     categories = CategorySerializer(required=False, many=True)
     tags = TagSerializer(required=False, many=True)
 
@@ -29,7 +33,7 @@ class JobSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'title',
-            'contractor',
+            'client',
             'description',
             'categories',
             'tags',

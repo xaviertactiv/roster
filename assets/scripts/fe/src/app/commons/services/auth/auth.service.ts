@@ -3,14 +3,14 @@ import { HttpClient } from '@angular/common/http';
 
 import { API_AUTH_LOGIN, API_AUTH } from '../../constants/api.constants';
 import { AUTH_KEY } from '../../constants/conf.constants';
-import { User } from '../../models/user.models';
+import { User, Client, Contractor } from '../../models/user.models';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  public user = new User();
+  public user: User = new User();
 
   constructor(
     private http: HttpClient

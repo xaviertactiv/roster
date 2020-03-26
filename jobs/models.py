@@ -1,13 +1,14 @@
 from django.conf import settings
 from django.db import models
+from users.models import Client, Contractor
 
 
 class Job(models.Model):
     """ job listing
     """
     title = models.CharField(max_length=200)
-    contractor = models.ForeignKey(settings.AUTH_USER_MODEL,
-        related_name="contractor", null=True, on_delete=models.SET_NULL)
+    client = models.ForeignKey(Client,
+        related_name="client", null=True, on_delete=models.SET_NULL)
     description = models.TextField()
     
     categories = models.ManyToManyField('Category', blank=True)
@@ -16,7 +17,7 @@ class Job(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
-    user_hired = models.ForeignKey(settings.AUTH_USER_MODEL,
+    user_hired = models.ForeignKey(Contractor,
         related_name="user_hired", null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
