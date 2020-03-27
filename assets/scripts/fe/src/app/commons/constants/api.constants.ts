@@ -13,3 +13,8 @@ export const API_AUTH_LOGIN = urlsafe(API_AUTH, 'login');
 /* JOBS
  */
 export const API_JOBS = urlsafe(API_URL, 'jobs');
+
+/**
+ * JOBS APPLICATION
+ */
+export const API_JOBS_APPLICATION = urlsafe(API_JOBS, 'application');

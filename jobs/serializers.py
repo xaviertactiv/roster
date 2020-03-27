@@ -5,7 +5,7 @@ from users.serializers import (
     ContractorSerializer,
 )
 
-from .models import Job, Category, Tag
+from .models import Job, Category, Tag, Application
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -48,7 +48,36 @@ class JobSerializer(serializers.ModelSerializer):
 
     def create(self, data):
         return self.Meta.model.objects.create(
-            contractor=self.user,
+            client=self.user.client_set.get(),
             **data,
         )
-        
+
+class ApplicationSerializer(serializers.ModelSerializer):
+    """job application serializer
+    """
+    contractor = ContractorSerializer(read_only=True)
+    job = serializers.CharField(min_length=1,allow_blank=True)
+    status = serializers.CharField(source='get_status_choices_display', read_only=True)
+
+    class Meta:
+        model = Application
+        fields = (
+            'id', 
+            'contractor',
+            'job',
+            'details',
+            'rate',
+            'status'
+        )
+    
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        return super(ApplicationSerializer, self).__init__(*args, **kwargs)
+    
+    def create(self, data):
+        job_id = data.pop('job')
+        return self.Meta.model.objects.create(
+            contractor=self.user.contractor_set.get(),
+            job=Job.objects.get(pk=job_id),
+            **data
+        )

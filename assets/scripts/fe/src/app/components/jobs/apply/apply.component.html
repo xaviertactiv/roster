@@ -1,1 +1,15 @@
-<p>apply works!</p>
+<form [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)">
+    <span [hidden]="!form.errors">Something went wrong. Please refresh the page</span>
+    <input formControlName='job' type="hidden" >
+    <div>
+        <label>Details:</label>
+        <textarea formControlName="details"></textarea>
+        <span [hidden]="form.valid('details')">This field is required.</span>
+    </div>
+    <div>
+        <label>Hourly Rate:</label>
+        <input formControlName="rate" type="number">
+        <span [hidden]="form.valid('rate')">This field is required.</span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
