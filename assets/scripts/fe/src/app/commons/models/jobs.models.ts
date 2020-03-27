@@ -31,3 +31,18 @@ export class Job {
     Object.assign(this, data);
   }
 }
+
+
+export class Application {
+  id: string = null;
+  contractor: string = null;
+  job: string = null;
+  details: string = null;
+  rate: number = null;
+  status: string = null;
+
+  constructor(data = {}) {
+    Object.assign(this, data);
+  }
+}
+

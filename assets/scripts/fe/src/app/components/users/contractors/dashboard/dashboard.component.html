@@ -5,7 +5,7 @@
             <div class="job-item">
                 <h5 class="title">{{ job.title }}</h5>
                 <p class="desc">{{ job.description }}</p>
-                <a href="">Apply for the Job</a> |
+                <a uiSref="jobs-apply" [uiParams]="{ jobId: job.id }" >Apply for the Job</a> |
                 <a href="">Save for Later</a>
                 <hr>
             </div>

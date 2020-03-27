@@ -23,7 +23,7 @@ export class CreateComponent implements OnInit {
     this.form = new JobForm(new Job());
   }
 
-  onSubmit({value, valid}: {value: Job, valid: boolean}) {
+  onSubmit({ value, valid }: { value: Job, valid: boolean }) {
     this.form.submitted = true;
     if (valid) {
       console.log(value);
@@ -37,7 +37,7 @@ export class CreateComponent implements OnInit {
         .catch((err: any) => {
           this.form.errors = err;
         })
-      ;
+        ;
     }
   }
 
