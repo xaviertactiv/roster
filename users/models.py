@@ -64,7 +64,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def _get_profile(self):
         _get = get_object_or_none
-        return _get(Client, user=self) or _get(Contractor, user=self)
+        try:
+            return _get(Client, user=self) or _get(Contractor, user=self)
+        except Exception:
+            # user has no designation. it is either
+            # created using the terminal or in the admin panel
+            return None
 
     @property
     def is_client(self):
