@@ -1,0 +1,27 @@
+<form [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)">
+    <span [hidden]="!form.errors">Something went wrong. Please refresh the page</span>
+    <div>
+        <label>Email:</label>
+        <input formControlName="email" type="text">
+        <span [hidden]="form.valid('email')">This field is required.</span>
+    </div>
+    <div>
+        <label>First Name:</label>
+        <input formControlName="first_name" type="text">
+        <span [hidden]="form.valid('first_name')">This field is required.</span>
+    </div>
+    <div>
+      <label>Last Name:</label>
+      <input formControlName="last_name" type="text">
+      <span [hidden]="form.valid('last_name')">This field is required.</span>
+    </div>
+    <div class="custom-control custom-radio">
+      <input formControlName="is_client" type="radio" class="custom-control-input"  id="client" value="true">
+      <label class="custom-control-label" for="client">Client</label>
+    </div>
+    <div class="custom-control custom-radio mb-3">
+      <input formControlName="is_client" type="radio" class="custom-control-input" id="contractor" value="false">
+      <label class="custom-control-label" for="contractor">Contractor</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>

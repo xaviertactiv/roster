@@ -10,6 +10,7 @@ import { APP_STATES } from './commons/utils/app.states';
 import { PublicModule } from './components/public/public.module';
 import { UsersModule } from './components/users/users.module';
 import { JobsModule } from './components/jobs/jobs.module';
+import { AccountModule } from './components/account/account.module';
 
 import { AppComponent } from './app.component';
 
@@ -24,7 +25,8 @@ import { AppComponent } from './app.component';
 
     PublicModule,
     UsersModule,
-    JobsModule
+    JobsModule,
+    AccountModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenService, multi: true }

@@ -44,7 +44,16 @@ class AuthUser(ViewSet):
     """ auth user endpoint
     """
     serializer_class = UserSerializer
-
     def get(self, request):
         serializer = self.serializer_class(request.user)
         return Response(serializer.data, status=200)
+
+    def put(self,request):
+        serializer = self.serializer_class(
+            request.user,
+            data=request.data
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=200)
+        

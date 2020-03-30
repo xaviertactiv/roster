@@ -53,5 +53,12 @@ export class User {
     }
     return `${this.email}`;
   }
+
+  /**
+   * get user type
+   */
+  userType() {
+    return this.is_client ? 'client' : 'contractor';
+  }
 }
 

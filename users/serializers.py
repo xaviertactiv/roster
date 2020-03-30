@@ -7,7 +7,6 @@ from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
@@ -92,7 +91,7 @@ class UserSerializer(serializers.ModelSerializer):
     """
     client = serializers.SerializerMethodField()
     contractor = serializers.SerializerMethodField()
-
+    is_client = serializers.BooleanField()
     class Meta:
         model = get_user_model()
         fields = (
@@ -116,3 +115,19 @@ class UserSerializer(serializers.ModelSerializer):
         if instance.is_client:
             return dict()
         return ContractorSerializer(instance.profile).data
+
+    def update(self, instance, data):
+        """update user profile
+        """
+        if data.pop('is_client' or False):
+            _, created = Client.objects.get_or_create(user=instance)
+            if created: instance.contractor_set.clear()
+        else:
+            _, created = Contractor.objects.get_or_create(user=instance)
+            if created: instance.client_set.clear()
+    
+        for (key, val) in data.items():
+            setattr(instance, key, val)
+        instance.save()
+
+        return instance

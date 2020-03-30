@@ -4,10 +4,10 @@
   <ul class="navbar-nav">
     <li ngbDropdown class="nav-item">
       <a ngbDropdownToggle class="nav-link" role="button">
-        {{ auth.user.displayName() }}
+        {{ auth.user.displayName() | titlecase }}
       </a>
       <div ngbDropdownMenu>
-        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" uiSref="profile">Profile</a>
         <a class="dropdown-item" href="#">Another action</a>
         <a class="dropdown-item" href="#">Something else here</a>
         <a class="dropdown-item" uiSref="logout">Log Out</a>
