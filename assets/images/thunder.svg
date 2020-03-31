@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <defs>
+        <clipPath id="prefix__clip-path">
+            <path id="prefix__Path_5" d="M0 0h24v-24H0z" class="prefix__cls-1" data-name="Path 5"/>
+        </clipPath>
+        <clipPath id="prefix__clip-path-2">
+            <path id="prefix__Rectangle_22" d="M0 0H31V33H0z" class="prefix__cls-1" data-name="Rectangle 22" transform="translate(-3 -28)"/>
+        </clipPath>
+        <clipPath id="prefix__clip-path-3">
+            <path id="prefix__Path_4" d="M2-1h20v-22H2z" class="prefix__cls-1" data-name="Path 4"/>
+        </clipPath>
+        <style>
+            .prefix__cls-1{fill:#fff}
+        </style>
+    </defs>
+    <g id="prefix__Group_976" data-name="Group 976" transform="translate(0 24)">
+        <g id="prefix__Group_975" data-name="Group 975" style="isolation:isolate">
+            <g id="prefix__Group_974" data-name="Group 974">
+                <g id="prefix__Group_973" data-name="Group 973">
+                    <path id="prefix__Path_3" d="M-3-28h30V4.006H-3z" class="prefix__cls-1" data-name="Path 3"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

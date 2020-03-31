@@ -1,14 +1,43 @@
-<div class="d-flex justify-align-center">
-    <div class="col-md-6">
-        <h3>New Jobs</h3>
-        <div class="job-items" *ngFor="let job of jobs.jobs">
-            <div class="job-item">
-                <h5 class="title">{{ job.title }}</h5>
-                <p class="desc">{{ job.description }}</p>
-                <a uiSref="jobs-apply" [uiParams]="{ jobId: job.id }" >Apply for the Job</a> |
-                <a href="">Save for Later</a>
-                <hr>
-            </div>
-        </div>
+<section class="main-content-wrapper">
+    <div class="search-container">
+      <input class="search__input" placeholder="Search" type="text">
+      <button class="search__button">
+        <i class="fas fa-search"></i>
+        Search
+      </button>
+      <button class="search__filter">
+        <i class="fas fa-filter"></i> Filter
+      </button>
     </div>
-</div>
+    <div class="jobs-container">
+      <div class="jobs__top">
+        <div class="jobs__count"><span>123 </span>Job Found</div>
+        <div class="jobs__sort">
+          <label for=""> Sort by</label>
+          <select name="" id="">
+            <option value="newest">Newest</option>
+            <option value="newest">oldest</option>
+          </select>
+        </div>
+      </div>
+      <div class="jobs__item" *ngFor="let job of jobs.jobs">
+        <div class="jobs__item-header">
+          <span class="title">{{ job.title }}</span>
+          <span class="time">11 mins ago</span>
+        </div>
+        <div class="jobs__item-body">
+          <p>{{ job.description }}</p>
+          <a href="">Read more</a>
+        </div>
+        <div class="jobs__item-footer">
+          <div class="tag">
+            <div class="tag-item">Fixed Price</div>
+            <div class="tag-item">Remote</div>
+            <div class="tag-item">1-3 months</div>
+            <div class="tag-item"> <i class="fas fa-map-marker"></i> United states</div>
+          </div>
+          <button uiSref="jobs-apply" [uiParams]="{ jobId: job.id }">Apply now</button>
+        </div>
+      </div>
+    </div>
+  </section>

@@ -6,3 +6,6 @@
 .vscode
 media/
 static/
+
+node_modules/
+assets/dist/

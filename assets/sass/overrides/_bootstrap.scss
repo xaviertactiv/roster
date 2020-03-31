@@ -1,0 +1,25 @@
+//overriding bootstrap theme colors
+$theme-colors: (
+  "primary": #00db9f,
+  "danger": #fa5568,
+  "success": #42ceb3,
+  "muted": #afb5c1,
+  "accent": #40e6da,
+  "purple": #7c5ef8,
+  "rose": #e85370,
+  "mango": #ff9f2f,
+  "blue": #1088ff,
+  "marigold": #fccb00,
+  "pink": #f85ebd
+);
+
+//disabling default bootstrap box shadows 
+
+$enable-shadows: false;
+
+
+.dropdown{
+  &--no-arrow::after {
+    display: none !important;
+  }
+}

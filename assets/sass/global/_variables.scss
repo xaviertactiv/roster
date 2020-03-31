@@ -1,0 +1,45 @@
+//typography variables
+
+$Text-Light: 'Eina01-Light';
+$Text-LightItalic: 'Eina01-LightItalic';
+$Text-Regular: 'Eina01-Regular';
+$Text-RegularItalic: 'Eina01-RegularItalic';
+$Text-Semibold: 'Eina01-SemiBold';
+$Text-SemiboldItalic: 'Eina01-SemiBoldItalic';
+$Text-Bold: 'Eina01-Bold';
+$Text-BoldItalic: 'Eina01-BoldItalic';
+
+//Primary colors
+
+$white: #ffffff;
+$dark: #06092b;
+$grey: #f8f9fa;
+$primary: #3a4eec;
+$primary-text: #3c4b62;
+
+// Mood Colors
+
+// $success: #45e0aa;
+// $danger: #e04551;
+// $warning: #ffde52;
+// $info: #4a73fa;
+
+
+//secondary colors
+$dark-blue: #151d3e;
+$charcoal: #3f434b;
+$off-white: #d5d5d5;
+
+
+//font-sizes:
+$basefont: 16;
+$h1: #{36 / $basefont}rem;
+$h2: #{30 / $basefont}rem;
+$h3: #{24 / $basefont}rem;
+$h4: #{20 / $basefont}rem;
+$h5: #{18 / $basefont}rem;
+$h6: #{16 / $basefont}rem;
+$paragraph: #{14 / $basefont}rem;
+$small: #{12 / $basefont}rem;
+
+

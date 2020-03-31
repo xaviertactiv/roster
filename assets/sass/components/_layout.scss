@@ -1,0 +1,12 @@
+.main-container {
+    width: torem(1200);
+    padding: torem(50) 0 !important;
+    @include flexbox();
+    @include justify-content(space-between);
+    flex-direction: row-reverse;
+}
+
+.main-content-wrapper{
+	width: calc(100% - 8rem);
+    position: relative;
+}

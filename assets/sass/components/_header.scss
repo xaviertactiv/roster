@@ -1,0 +1,63 @@
+.header {
+  @include flexbox();
+  @include justify-content(space-between);
+  padding: torem(30) 0 torem(27.5) 0 !important;
+  border-bottom: solid 1px $off-white;
+  &__left {
+    display: inherit;
+    .logo {
+      font-size: torem(21);
+      font-weight: bold;
+      line-height: 1.19;
+      color: $primary;
+      margin-right: torem(56);
+      display: inherit;
+      @include align-items(center);
+    }
+    input {
+      width: 403px;
+      height: 46px;
+      border-radius: 4px;
+      border: none;
+      background-color: #ffffff;
+      padding: torem(15) torem(20);
+      font-size: $basefont;
+      line-height: 1.19;
+      letter-spacing: -0.32px;
+      &::placeholder {
+        color: $off-white;
+      }
+      &:focus {
+        outline-color: transparent;
+        outline-style: none;
+      }
+    }
+  }
+  &__right {
+    @include flexbox();
+    @include align-items(center);
+    ul {
+      @include align-items(center);
+      flex-direction: row !important;
+      font-size: $basefont;
+      font-weight: 600;
+      line-height: 1.38;
+      color: $primary-text;
+      margin-bottom: 0 !important;
+      li {
+        display: inline;
+        margin-right: torem(44);
+      }
+    }
+    i {
+      color: $off-white;
+    }
+    .profile {
+      width: torem(40);
+      height: torem(40);
+      border-radius: 50%;
+      background-size: cover;
+      margin-left: torem(20);
+    }
+  }
+}

@@ -1,0 +1,212 @@
+.sidebar {
+  float: right;
+  .card {
+    width: 236px;
+    height: 78px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 10px 20px 0 rgba(133, 141, 149, 0.08);
+    background-color: $white;
+    padding: torem(17) torem(20);
+    text-align: center;
+    &__title {
+      font-size: $basefont;
+      font-weight: 600;
+      line-height: 1.5;
+      color: $primary;
+    }
+    &__subtitle {
+      font-size: torem(14);
+      line-height: 1.71;
+      color: #969ba3;
+    }
+  }
+
+  .category{
+    margin-top: torem(155);
+    &__top {
+      @include flexbox();
+      @include justify-content(space-between);
+      margin-bottom: torem(13);
+      .label {
+        font-size: $basefont;
+        font-weight: 600;
+        line-height: 1.5;
+        color: $primary;
+      }
+      .show-all{
+        font-size: torem(14);
+        font-weight: 600;
+        line-height: 1.71;
+        color: $primary-text;
+      }
+    }
+    &__item {
+      width: fit-content;
+      padding: torem(9) torem(16);
+      border-radius: torem(4);
+      background-color: #efefef;
+      font-size: $basefont;
+      font-weight: bold;
+      line-height: 1.19;
+      letter-spacing: -0.32px;
+      color: $primary-text;
+      margin-bottom: torem(13);
+    }
+  }
+}
+
+.search {
+  &-container {
+    @include flexbox();
+  }
+  &__input {
+    width: 403px;
+    height: 46px;
+    border-radius: torem(4);
+    border: solid 2px #efefef;
+    background-color: $white;
+    margin-right: torem(16);
+    padding: torem(15) torem(20);
+    &::placeholder {
+      color: $off-white;
+    }
+    &:focus {
+      outline-color: transparent;
+      outline-style: none;
+    }
+  }
+  &__button {
+    border-radius: 4px;
+    background-color: $primary;
+    font-size: $basefont;
+    font-weight: 600;
+    line-height: 1.38;
+    letter-spacing: -0.32px;
+    color: $white;
+    margin-right: torem(16);
+    padding: torem(10) torem(30);
+  }
+  &__filter {
+    border-radius: torem(4);
+    background-color: #efefef;
+    font-size: $basefont;
+    font-weight: 600;
+    line-height: 1.38;
+    letter-spacing: -0.32px;
+    color: $primary-text;
+    border: none;
+    padding: torem(10) torem(30);
+  }
+}
+
+.jobs {
+  &-container {
+    margin-top: torem(52);
+  }
+  &__top {
+    @include flexbox();
+    @include justify-content(space-between);
+    @include align-items(center);
+  }
+  &__count {
+    font-size: torem($basefont);
+    line-height: 1.5;
+    color: $primary-text;
+    span {
+      font-weight: 600;
+    }
+  }
+  &__sort {
+    label {
+      font-size: torem($basefont);
+      font-weight: 600;
+      line-height: 1.5;
+      color: $primary-text;
+      margin-right: torem(10);
+    }
+    select {
+      border-radius: torem(4);
+      border: solid 2px #efefef;
+      background-color: #ffffff;
+      padding: torem(9);
+      
+      &:focus {
+        outline-color: transparent;
+        outline-style: none;
+      }
+    }
+  }
+  &__item{
+    border-radius: torem(4);
+    background-color: $white;
+    padding: torem(30) torem(40);
+    margin-top: torem(40);
+    &-header {
+      @include flexbox();
+      @include justify-content(space-between);
+      margin-bottom: torem(14);
+      .title {
+        font-size: torem(30);
+        font-weight: 600;
+        line-height: 1.37;
+        letter-spacing: -0.6px;
+        color: $dark;
+      }
+      .time {
+        -webkit-text-stroke: 1px rgba(0, 0, 0, 0);
+        font-size: torem(12);
+        line-height: 2.67;
+        color: $primary-text;
+        @include flexbox();
+        @include align-items(flex-end);
+      }
+    }
+    &-body {
+      p {
+        font-size: torem(18);
+        line-height: 1.78;
+        text-align: left;
+        color: $primary-text;
+        margin-bottom: torem(14);
+      }
+      a {
+        font-size: 16px;
+        font-weight: 600;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.5;
+        letter-spacing: normal;
+        text-align: left;
+        color: #3a4eec;
+      }
+    }
+    &-footer {
+      @include flexbox();
+      @include align-items(center);
+      @include justify-content(space-between);
+      margin-top: torem(13);
+      .tag {
+        @include flexbox();
+        &-item {
+          font-size: torem($basefont);
+          font-weight: 600;
+          line-height: 1.5;
+          color: $primary-text;
+          margin-right: torem(44);
+        }
+      }
+      button {
+        border-radius: torem(4);
+        background-color: $primary;
+        font-size: torem($basefont);
+        font-weight: 600;
+        line-height: 1.38;
+        letter-spacing: -0.32px;
+        color: $white;
+        padding: torem(13) torem(23);
+      }
+    }    
+  }
+ 
+}

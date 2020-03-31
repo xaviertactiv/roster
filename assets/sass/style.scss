@@ -1,0 +1,29 @@
+//overrides
+
+
+
+//global
+@import 'global/typography';
+@import 'global/variables';
+@import 'global/mixins';
+@import 'global/functions';
+
+//overrides
+@import 'overrides/bootstrap';
+
+@import 'global/utils';
+
+//components
+@import 'components/header';
+@import 'components/layout';
+
+// partials
+@import 'partials/navbar'; 
+	
+// pages
+
+@import 'pages/index';
+
+// icons
+@import "../../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+

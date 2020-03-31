@@ -1,17 +1,25 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
-  <a class="navbar-brand" href="#">Roster</a>
-
-  <ul class="navbar-nav">
-    <li ngbDropdown class="nav-item">
-      <a ngbDropdownToggle class="nav-link" role="button">
-        {{ auth.user.displayName() | titlecase }}
-      </a>
-      <div ngbDropdownMenu>
-        <a class="dropdown-item" uiSref="profile">Profile</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-        <a class="dropdown-item" uiSref="logout">Log Out</a>
+<div class="container header">
+  <div class="header__left">
+    <div class="logo">Roster.</div>
+    <input type="text" placeholder="search">
+  </div>
+  <nav class="header__right">
+    <ul class="navbar-nav">
+      <li>Search Jobs</li>
+      <li>Reports</li>
+      <li>Messages</li>
+      <i class="fas fa-bell"></i>
+      <div ngbDropdown display="dynamic" placement="bottom-right">
+        <a ngbDropdownToggle class="dropdown--no-arrow">
+          <!-- will update this once the update user api is itegrated -->
+          <img class="profile" src="static/images/temp.png" *ngIf="auth.user.image; else elseBlock">
+          <ng-template #elseBlock><img class="profile" src="static/images/temp.png" alt="" ></ng-template>
+        </a>
+        <div ngbDropdownMenu>
+          <a class="dropdown-item" href="#">{{ auth.user.displayName() }}</a>
+          <a class="dropdown-item" uiSref="logout">Log Out</a>
+        </div>
       </div>
-    </li>
-  </ul>
-</nav>
+    </ul>
+  </nav>
+</div>
