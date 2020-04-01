@@ -8,8 +8,6 @@ import { Job } from '../../models/jobs.models';
   providedIn: 'root'
 })
 export class JobService {
-  public jobs: any;
-
   constructor(
     private http: HttpClient
   ) {}
@@ -20,12 +18,9 @@ export class JobService {
     ;
   }
 
-  list() {
-    return this.http.get(API_JOBS)
+  list(data: object) {
+    return this.http.get(API_JOBS, data)
       .toPromise()
-      .then((resp) => {
-        this.jobs = resp;
-      })
     ;
   }
 }
