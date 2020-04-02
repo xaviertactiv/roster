@@ -13,6 +13,10 @@ export class DashboardComponent implements OnInit {
   public jobsList: any = [];
   public nextPage: any = 0;
   public count: number;
+  public keyword: any = '';
+  public sortBy: string = "newest";
+  private params: any = {};
+  public limit: number = 1;
 
   constructor(
     private auth: AuthService,
@@ -21,19 +25,33 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     // fetch data from the backend
-    this.loadData();
-
+    this.setParam()
   }
 
-  loadData() {
+  loadData() {   
     if(this.nextPage != null) {
-      this.jobs.list({'params': {'offset': this.nextPage}}).then((resp) => {
-        this.jobsList.push(...resp['results']);
+
+      this.jobs.list(this.params).then((resp) => {
+
+        // if previous is empty set the new joblist else add the joblist
+        if(!resp['previous']){
+          this.jobsList = resp['results'];
+        } else {
+          this.jobsList.push(...resp['results']);
+        }
         this.count = resp['count'];
-        this.nextPage = new URLSearchParams(resp['next']);
-        this.nextPage = resp['next'] ? this.nextPage.get('offset'): null;
+        this.nextPage = new URLSearchParams(resp['next']).get('offset');
+        this.params["offset"] = this.nextPage;
       })
     }
+  }
+  
+  setParam(){
+    this.params["offset"] = null;
+    this.params["search"] = this.keyword;
+    this.params["ordering"] = this.sortBy == 'newest' ? '-date_created' : 'date_created';
+    this.nextPage = 0;
+    this.loadData();
   }
 
   @HostListener('window:scroll', ['$event'])

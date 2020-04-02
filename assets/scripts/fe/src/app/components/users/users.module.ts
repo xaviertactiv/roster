@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UIRouterModule } from '@uirouter/angular';
+import { WidgetsModule } from './../widgets/widgets.module';
 
 import { DashboardComponent as C_DashboardComponent } from './contractors/dashboard/dashboard.component';
 import { DashboardComponent as F_DashboardComponent } from './clients/dashboard/dashboard.component';
@@ -24,7 +25,8 @@ import { SideComponent } from './partials/side/side.component';
     CommonModule,
     FormsModule,
     NgbModule,
-    UIRouterModule
+    UIRouterModule,
+    WidgetsModule
   ]
 })
 export class UsersModule { }

@@ -1,0 +1,2 @@
+<p [innerHTML]="summary"></p>
+<div *ngIf="text.length >= maxChar" (click)="toggle()"> {{ isExpand ?  'Hide' : 'Read more' }}</div>

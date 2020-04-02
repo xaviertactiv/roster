@@ -18,8 +18,8 @@ export class JobService {
     ;
   }
 
-  list(data: object) {
-    return this.http.get(API_JOBS, data)
+  list(data: any) {
+    return this.http.get(API_JOBS, {params: data})
       .toPromise()
     ;
   }
