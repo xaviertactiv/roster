@@ -6,7 +6,8 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 
 from .serializers import (
     JobSerializer,
-    ApplicationSerializer
+    ApplicationSerializer,
+    CategorySerializer
 )
 
 
@@ -60,6 +61,26 @@ class Applications(ViewSet):
         serializer = self.serializer_class(
             data=request.data,
             user=request.user
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response(serializer.data, status=201)
+
+class Categories(ViewSet):
+    """ jobs categories endpoint
+    """
+    serializer_class = CategorySerializer
+    def get(self, request):
+        serializer = self.serializer_class(
+            self.serializer_class.Meta.model.objects.all(),
+            many=True
+        )
+        return Response(serializer.data, status=200)
+
+    def create(self, request):
+        serializer = self.serializer_class(
+            data=request.data
         )
         serializer.is_valid(raise_exception=True)
         serializer.save()

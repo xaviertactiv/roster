@@ -6,6 +6,10 @@
 export class Category {
   id: string = null;
   name: string = null;
+  
+  constructor(data = {}) {
+    Object.assign(this, data);
+  }
 }
 
 /* Model for Tag
@@ -45,4 +49,3 @@ export class Application {
     Object.assign(this, data);
   }
 }
-

@@ -8,13 +8,10 @@
         <span class="label">
           Categories
         </span>
-        <a href="">(Show all 56)</a>
+        <a *ngIf="categoriesList && categoriesList.length > 4" (click)="toggle()">({{ isExtend ? 'Hide' : 'Show all ' + categoriesList.length }})</a>
       </div>
       <div class="category__content">
-        <div class="category__item">Design</div>
-        <div class="category__item">Data Analytics</div>
-        <div class="category__item">Project Management</div>
-        <div class="category__item">Development</div>
+        <div class="category__item" *ngFor="let category of categoriesList | slice:0:initial">{{category.name}}</div>
       </div>
     </div>
   </aside>

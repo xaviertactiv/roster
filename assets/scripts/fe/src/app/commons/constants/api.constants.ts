@@ -18,3 +18,8 @@ export const API_JOBS = urlsafe(API_URL, 'jobs');
  * JOBS APPLICATION
  */
 export const API_JOBS_APPLICATION = urlsafe(API_JOBS, 'application');
+
+/**
+ * JOBS APPLICATION
+ */
+export const API_JOBS_CATEGORY = urlsafe(API_JOBS, 'category');

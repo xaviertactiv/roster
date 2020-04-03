@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import Jobs, Applications
+from .views import Jobs, Applications, Categories
 
 
 urlpatterns = [
@@ -11,6 +11,10 @@ urlpatterns = [
         'get': 'retrieve',
     })),
     path('application/', Applications.as_view({
+        'get': 'get',
+        'post': 'create',
+    })),
+    path('category/', Categories.as_view({
         'get': 'get',
         'post': 'create',
     }))
