@@ -11,7 +11,7 @@
   </div>
   <div class="jobs-container">
     <div class="jobs__top">
-      <div class="jobs__count"><span> {{count? count: '0'}} </span>Job Found</div>
+      <div class="jobs__count"><span> {{jobs.jobs? jobs.jobs.count: '0'}} </span>Job Found</div>
       <div class="jobs__sort">
         <label for=""> Sort by</label>
         <select name="" id="" [(ngModel)]="sortBy" (change)="setParam()">
@@ -20,7 +20,7 @@
         </select>
       </div>
     </div>
-    <div class="jobs__item" *ngFor="let job of jobsList">
+    <div class="jobs__item" *ngFor="let job of jobs.jobs.results">
       <div class="jobs__item-header">
         <span class="title">{{ job.title }}</span>
         <span class="time">11 mins ago</span>

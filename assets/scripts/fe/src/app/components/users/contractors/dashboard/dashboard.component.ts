@@ -10,8 +10,6 @@ import { AuthService } from '../../../../commons/services/auth/auth.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  public jobsList: any = [];
-  public nextPage: any = 0;
   public count: number;
   public keyword: any = '';
   public sortBy: string = "newest";
@@ -25,32 +23,21 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     // fetch data from the backend
-    this.setParam()
+    this.loadData();
+    // this.loadData();
+   
   }
 
   loadData() {   
-    if(this.nextPage != null) {
+    this.jobs.list(this.params);
 
-      this.jobs.list(this.params).then((resp) => {
-
-        // if previous is empty set the new joblist else add the joblist
-        if(!resp['previous']){
-          this.jobsList = resp['results'];
-        } else {
-          this.jobsList.push(...resp['results']);
-        }
-        this.count = resp['count'];
-        this.nextPage = new URLSearchParams(resp['next']).get('offset');
-        this.params["offset"] = this.nextPage;
-      })
-    }
   }
   
   setParam(){
-    this.params["offset"] = null;
+    delete this.params["page"];
     this.params["search"] = this.keyword;
     this.params["ordering"] = this.sortBy == 'newest' ? '-date_created' : 'date_created';
-    this.nextPage = 0;
+
     this.loadData();
   }
 
@@ -59,9 +46,13 @@ export class DashboardComponent implements OnInit {
     let scrollHeight = event.target.scrollingElement.scrollHeight;
     let scrollTop = event.target.scrollingElement.scrollTop;
     let clientHeight = event.target.scrollingElement.clientHeight;
-
-    if (((scrollHeight - scrollTop) - clientHeight) < 5){
-      this.loadData()
+    
+    if (((scrollHeight - scrollTop) - clientHeight) == 0){
+      let nextPage = this.jobs.jobs.next ? new URL(this.jobs.jobs.next).searchParams.get('page') : null;
+      this.params["page"] = nextPage;
+      if(this.params["page"]) {
+        this.loadData();
+      }
     }
   }
 }

@@ -36,6 +36,17 @@ export class Job {
   }
 }
 
+export class JobList {
+  count: number = null;
+  next: string = null;
+  previous: string = null;
+  results:  Job[]= Array<Job>();
+
+  constructor(data = {}) {
+    Object.assign(this, data);
+  }
+}
+
 
 export class Application {
   id: string = null;

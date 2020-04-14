@@ -8,10 +8,11 @@
         <span class="label">
           Categories
         </span>
-        <a *ngIf="categoriesList && categoriesList.length > 4" (click)="toggle()">({{ isExtend ? 'Hide' : 'Show all ' + categoriesList.length }})</a>
+        <a *ngIf="categories.getCategories() && categories.getCategories().length > 4" (click)="toggle()">({{ isExtend ? 'Hide' : 'Show all ' + categories.getCategories().length }})</a>
+
       </div>
       <div class="category__content">
-        <div class="category__item" *ngFor="let category of categoriesList | slice:0:initial">{{category.name}}</div>
+        <div class="category__item" *ngFor="let category of categories.getCategories() | slice:0:limit">{{ category.name }}</div>
       </div>
     </div>
   </aside>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../../../../commons/services/auth/auth.service';
-import { CategoriesService } from '../../../../commons/services/jobs/categories.service';
+import { CategoryService } from '../../../../commons/services/jobs/category.service';
 
 @Component({
   selector: 'app-side',
@@ -9,27 +9,23 @@ import { CategoriesService } from '../../../../commons/services/jobs/categories.
   styleUrls: ['./side.component.css']
 })
 export class SideComponent implements OnInit {
-
   public userState: string;
-  public initial: number = 4;
+  public limit: number = 4;
   public isExtend: boolean = false;
-  public categoriesList: any;
 
   constructor(
     private auth: AuthService,
-    private categories: CategoriesService
+    private categories: CategoryService
   ) { }
 
   ngOnInit() {
     this.userState = this.auth.user.is_client ? 'client' : 'contractor';
-    this.categories.list().then( (resp) => {
-      this.categoriesList = resp;
-    });
+    this.categories.list();
   }
 
   toggle() {
     this.isExtend = !this.isExtend;
-    this.initial = this.isExtend ? this.categoriesList.length : 4;
+    this.limit = this.isExtend ? this.categories.getCategories().length : 4;
   }
 
 }
